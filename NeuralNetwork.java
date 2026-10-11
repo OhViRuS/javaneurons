@@ -7,6 +7,7 @@ public class NeuralNetwork {
     public double[] bHidden; //b - bias
     public double bOutput;
     public int hiddenSize = 6;
+    public double currentMSE;
 
     public NeuralNetwork() {
         initializeWeights();
@@ -61,30 +62,6 @@ public class NeuralNetwork {
             sum += error * error;
         }
         return sum / dataset.size();
-    }
-    public NeuralNetwork clone() {
-        NeuralNetwork copy = new NeuralNetwork();
-
-        // copy input-hidden weights
-        for (int i = 0; i < wInputHidden.length; i++) {
-            for (int j = 0; j < wInputHidden[i].length; j++) {
-                copy.wInputHidden[i][j] = this.wInputHidden[i][j];
-            }
-        }
-
-        // copy hidden-output weights
-        for (int i = 0; i < wHiddenOutput.length; i++) {
-            copy.wHiddenOutput[i] = this.wHiddenOutput[i];
-        }
-
-        // copy biases
-        for (int i = 0; i < bHidden.length; i++) {
-            copy.bHidden[i] = this.bHidden[i];
-        }
-
-        copy.bOutput = this.bOutput;
-
-        return copy;
     }
     public double calculateAccuracy(ArrayList<IrisData> dataset) {
         int correct = 0;
